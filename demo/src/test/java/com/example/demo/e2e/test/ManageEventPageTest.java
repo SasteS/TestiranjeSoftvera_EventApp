@@ -45,13 +45,23 @@ public class ManageEventPageTest {
 
     @Test
     public void testSelectCategories() {
-        // Test selecting categories based on event type
-        manageEventPage.selectEventType("CONFERENCE");
-        String[] expectedCategories = {"Tech", "Business", "Education"};
-        manageEventPage.selectCategories(expectedCategories);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
-        // Assuming categories are rendered and selected in a multiple dropdown
-        WebElement categoriesDropdown = driver.findElement(By.id("categories"));
+        // Select event type (this triggers Angular to show categories)
+        manageEventPage.selectEventType("CONFERENCE");
+
+        // Wait for the categories select element to be present
+        WebElement categoriesDropdown = wait.until(
+                ExpectedConditions.presenceOfElementLocated(By.id("categories"))
+        );
+
+        // Select categories
+        manageEventPage.selectCategories(new String[]{"Tech", "Business", "Education"});
+
+        // Wait for values to update (optional delay for Angular binding)
+        wait.until(driver -> categoriesDropdown.getText().contains("Tech"));
+
+        // Now assert the expected values
         assertTrue(categoriesDropdown.getText().contains("Tech"));
         assertTrue(categoriesDropdown.getText().contains("Business"));
     }

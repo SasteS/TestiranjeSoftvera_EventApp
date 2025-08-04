@@ -64,7 +64,13 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 
-<!-- DISABLE THESE 2 DEPENDENCIES TO CHECK WITHOUT SECURITY -->
+		<dependency>
+			<groupId>io.github.bonigarcia</groupId>
+			<artifactId>webdrivermanager</artifactId>
+			<version>6.2.0</version> <!-- check for the latest version -->
+		</dependency>
+
+		<!-- DISABLE THESE 2 DEPENDENCIES TO CHECK WITHOUT SECURITY -->
 <!--		<dependency>-->
 <!--			<groupId>org.springframework.boot</groupId>-->
 <!--			<artifactId>spring-boot-starter-security</artifactId>-->

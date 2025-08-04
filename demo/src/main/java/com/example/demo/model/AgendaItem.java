@@ -97,7 +97,7 @@ public class AgendaItem {
                 ", startTime=" + startTime +
                 ", endTime=" + endTime +
                 ", location='" + location + '\'' +
-                ", event=" + event.getId() +
+                ", event=" + (event != null ? event.getId() : "null") + //event.getId() +
                 '}';
     }
 }

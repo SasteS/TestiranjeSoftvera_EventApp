@@ -3,7 +3,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { of, throwError } from 'rxjs';
-import { fakeAsync, tick } from '@angular/core/testing';
+import { fakeAsync, tick, flush } from '@angular/core/testing';
 
 import { RegistrationComponent } from './registration.component';
 import { UserService } from '../service/user/user.service';
@@ -78,8 +78,9 @@ describe('RegistrationComponent', () => {
   it('should call createUser on valid form submission', fakeAsync(() => {
     mockUserService.createUser.and.returnValue(of({ message: 'User created successfully' }));
 
-    // Populate the form with valid data
-    component.registrationForm.setValue({
+    component.onUserTypeChange({ target: { value: 'OD' } } as any);
+
+    component.registrationForm.patchValue({
       userType: 'OD',
       email: 'test@example.com',
       password: 'StrongPass1!',
@@ -87,23 +88,20 @@ describe('RegistrationComponent', () => {
       firstName: 'John',
       lastName: 'Doe',
       phone: '1234567890',
-      address: '123 Main St',
-      businessName: '',
-      businessAddress: '',
-      businessPhone: '',
-      about: ''
+      address: '123 Main St'
     });
 
-    // Trigger the onSubmit method
+    component.registrationForm.updateValueAndValidity();
+    fixture.detectChanges();
+
+    console.log('Form valid?', component.registrationForm.valid);
+    console.log('Errors:', component.registrationForm.errors);
+
     component.onSubmit();
+    tick();
+    flush(); // Ensure timers are cleared
 
-    // Simulate async passage of time
-    tick(); // This will simulate the passage of time for async operations
-
-    // Verify that the createUser method was called
     expect(mockUserService.createUser).toHaveBeenCalled();
-
-    // Verify the navigation to event-management
     expect(mockRouter.navigate).toHaveBeenCalledWith(['/event-management']);
   }));
 

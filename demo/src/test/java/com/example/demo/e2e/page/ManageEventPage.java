@@ -160,6 +160,8 @@ public class ManageEventPage {
         WebElement addButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(), 'Add Activity')]")));
         addButton.click();
 
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("activityName")));
+
         WebElement agendaItemNameInput =  driver.findElement(By.id("activityName")); // wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("input[formcontrolname='activityName']")));
         WebElement agendaItemDescriptionTextarea = driver.findElement(By.id("activityDescription"));
         WebElement agendaItemStartTimeInput = driver.findElement(By.id("startTime"));
