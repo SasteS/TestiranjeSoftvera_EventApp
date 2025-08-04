@@ -1,0 +1,11 @@
+# ignore all node and Java artifacts
+**/node_modules
+**/dist
+**/build
+**/target
+**/*.log
+**/.env
+**/.DS_Store
+**/.idea
+**/.vscode
+**/*.iml
