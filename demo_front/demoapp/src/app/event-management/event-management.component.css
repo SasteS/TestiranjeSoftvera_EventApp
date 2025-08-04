@@ -1,0 +1,103 @@
+form {
+  max-width: 600px;
+  margin: auto;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+input, textarea, select, button {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+input.ng-valid, textarea.ng-valid, select.ng-valid {
+  border-color: green;
+  /* background-color: #e8f5e9; */
+}
+
+input.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched, select.ng-invalid.ng-touched {
+  border-color: red;
+  /* background-color: #ffebee; */
+}
+
+button {
+  margin-top: 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.75rem;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+button:disabled {
+  background-color: #ccc; /* Light gray background */
+  color: #666; /* Darker gray text */
+  cursor: not-allowed; /* Change cursor to indicate disabled state */
+  border: 1px solid #ddd; /* Optional: subtle border */
+  opacity: 0.7; /* Slightly transparent */
+}
+
+h1, h2 {
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  form {
+      padding: 0.5rem;
+      max-width: 90%;
+  }
+
+  input, textarea, select, button {
+      font-size: 0.9rem;
+      padding: 0.4rem;
+  }
+}
+
+.error {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+/* Success Snackbar (green background) */
+.success-snackbar {
+  background-color: green;
+  color: white;
+}
+
+/* Error Snackbar (red background) */
+.error-snackbar {
+  background-color: red;
+  color: white;
+}
+
+select[multiple] {
+  height: 150px; /* Allows more room for multiple selections */
+}
+
+option {
+  padding: 10px;
+}

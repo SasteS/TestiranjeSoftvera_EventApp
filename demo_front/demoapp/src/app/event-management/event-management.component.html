@@ -1,0 +1,70 @@
+<h1>Manage Your Event</h1>
+<form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+  <!-- Event Type -->
+  <label for="type">Event Type:</label>
+  <select id="type" formControlName="type" (change)="onEventTypeChange()">
+    <option value="">Select Event Type</option>
+    <option value="CONFERENCE">Conference</option>
+    <option value="WEDDING">Wedding</option>
+    <option value="ALL">All</option>
+  </select>
+
+  <!-- Event Categories (Only shown if event type is selected) -->
+  <div *ngIf="selectedEventType">
+    <label for="categories">Categories:</label>
+    <select id="categories" formControlName="services" multiple>
+      <option *ngFor="let category of getCategoriesForEventType(selectedEventType)" [value]="category">
+        {{ category }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Other Fields -->
+  <label for="name">Event Name:</label>
+  <input id="name" type="text" formControlName="name" required />
+
+  <label for="description">Event Description:</label>
+  <textarea id="description" formControlName="description"></textarea>
+
+  <label for="maxParticipants">Max Participants:</label>
+  <input id="maxParticipants" type="number" formControlName="maxParticipants" required />
+
+  <label for="privacyType">Privacy Type:</label>
+  <select id="privacyType" formControlName="privacyType">
+    <option value="OPEN">Open</option>
+    <option value="CLOSED">Closed</option>
+  </select>
+
+  <label for="location">Location:</label>
+  <input id="location" type="text" formControlName="location" />
+
+  <label for="date">Event Date:</label>
+  <input id="date" type="date" formControlName="date" required />
+
+  <!-- Agenda -->
+  <h2>Event Agenda</h2>
+  <div formArrayName="agenda">
+    <div *ngFor="let agendaItem of agenda.controls; let i = index" [formGroupName]="i">
+      <label for="activityName">Activity Name:</label>
+      <input id="activityName" type="text" formControlName="name" />
+
+      <label for="activityDescription">Activity Description:</label>
+      <textarea id="activityDescription" formControlName="description"></textarea>
+
+      <label for="startTime">Start Time:</label>
+      <input id="startTime" type="time" formControlName="startTime" />
+
+      <label for="endTime">End Time:</label>
+      <input id="endTime" type="time" formControlName="endTime" />
+
+      <label for="activityLocation">Location:</label>
+      <input id="activityLocation" type="text" formControlName="location" />
+
+      <button type="button" (click)="removeAgendaItem(i)">Remove Activity</button>
+    </div>
+    <button type="button" (click)="addAgendaItem()">Add Activity</button>
+  </div>
+
+  <!-- Submit Button -->
+  <button type="submit" [disabled]="eventForm.invalid">Create Event</button>
+</form>

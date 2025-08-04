@@ -1,0 +1,56 @@
+<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+  <!-- Select User Type -->
+  <label for="userType">Register as:</label>
+  <select id="userType" formControlName="userType" (change)="onUserTypeChange($event)">       
+      <option value="OD">Organizer (OD)</option>
+      <option value="PUP">Business Entity (PUP)</option>
+  </select>      
+
+  <!-- Shared Fields -->
+  <label for="email">Email:</label>
+  <input id="email" type="email" formControlName="email" required />
+
+  <label for="password">Password:</label>
+  <input id="password" type="password" formControlName="password" placeholder="At least 1 uppercase and one special character" required />
+
+  <label for="confirmPassword">Confirm Password:</label>
+  <input id="confirmPassword" type="password" formControlName="confirmPassword" required />
+
+  <!-- Organizer Fields -->
+  <div *ngIf="isOrganizer">
+    <label for="firstName">First Name:</label>
+    <input id="firstName" type="text" formControlName="firstName" />
+
+    <label for="lastName">Last Name:</label>
+    <input id="lastName" type="text" formControlName="lastName" />
+
+    <label for="phone">Phone Number:</label>
+    <input id="phone" type="text" formControlName="phone" placeholder="+1234567890, 123-456-7890, 1234567890"/>
+
+    <label for="address">Address:</label>
+    <input id="address" type="text" formControlName="address" />
+
+    <label for="profilePhoto">Profile Photo:</label>
+    <input id="profilePhoto" type="file" (change)="onFileSelect($event)" />
+  </div>
+
+  <!-- Business Entity Fields -->
+  <div *ngIf="isBusinessEntity">
+    <label for="businessName">Business Name:</label>
+    <input id="businessName" type="text" formControlName="businessName" />
+
+    <label for="businessAddress">Business Address:</label>
+    <input id="businessAddress" type="text" formControlName="businessAddress" />
+
+    <label for="businessPhone">Business Phone:</label>
+    <input id="businessPhone" type="text" formControlName="businessPhone" placeholder="+1234567890, 123-456-7890, 1234567890"/>
+
+    <label for="about">About the Business:</label>
+    <textarea id="about" formControlName="about"></textarea>
+
+    <label for="businessPhoto">Business Photo:</label>
+    <input id="businessPhoto" type="file" (change)="onFileSelect($event)" />
+  </div>
+
+  <button type="submit" [disabled]="registrationForm.invalid">Register</button>
+</form>
