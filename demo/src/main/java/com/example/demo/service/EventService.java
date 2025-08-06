@@ -26,7 +26,8 @@ public class EventService {
     }
 
     public Boolean createEvent(Event event) {
-        System.out.println("Event to be created: " + event.toString());
+//        System.out.println("Event to be created: " + event.toString());
+        System.out.println("Event to be created: " + event.getName());// + ", By User: " + event.getOrganizer().getId());
 
         try {
             // Validate organizer existence
